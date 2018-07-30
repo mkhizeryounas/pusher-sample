@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Developers</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://js.pusher.com/4.2/pusher.min.js"></script>
+  <script>
+
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('3a2bd43d6c2974573b4b', {
+      cluster: 'ap2',
+      encrypted: true
+    });
+
+    // var channel = pusher.subscribe('my-channel');
+    var privateChannel = pusher.subscribe("channel_test_user_hash");
+
+    privateChannel.bind('notify', function (data) {
+      alert(JSON.stringify(data));
+    });
+  </script>
+
+  <style>
+    .main-app {
+      border: 2px solid #eee;
+      border-radius: 4px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      padding: 10px;
+      min-height: 85vh;
+    }
+
+    .main-app>h4 {
+      padding-bottom: 5px;
+      border-bottom: 1px solid #eee;
+    }
+  </style>
+  <script>
+    $(() => {
+      $("#btn").click(function () {
+        $.ajax({
+          url: "./api.php"
+        });
+      })
+    })
+  </script>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+      <code>{ developers }</code>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+    </div>
+  </nav>
+  <div class="container main-app">
+    <h4>Heading</h4>
+    <div class="row">
+      <div class="col-md-12">
+        <button class="btn btn-primary" id="btn">
+          Push notification
+        </button>
+        <hr>
+        <ul id="list"></ul>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
